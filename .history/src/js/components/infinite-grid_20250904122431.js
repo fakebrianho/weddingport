@@ -49,15 +49,6 @@ export default class InfiniteGrid {
 		this.$container.addEventListener('mousedown', this.onMouseDown)
 		window.addEventListener('mouseup', this.onMouseUp)
 
-		// Touch events for mobile
-		this.$container.addEventListener('touchstart', this.onTouchStart, {
-			passive: false,
-		})
-		window.addEventListener('touchmove', this.onTouchMove, {
-			passive: false,
-		})
-		window.addEventListener('touchend', this.onTouchEnd)
-
 		this.observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
 				entry.target.classList.toggle('visible', entry.isIntersecting)
@@ -322,62 +313,6 @@ export default class InfiniteGrid {
 		}
 	}
 
-	onTouchStart(e) {
-		e.preventDefault()
-		const touch = e.touches[0]
-		this.isDragging = true
-		this.clickStartTime = Date.now()
-		this.clickStartPos = { x: touch.clientX, y: touch.clientY }
-		document.documentElement.classList.add('dragging')
-		this.mouse.press.t = 1
-		this.drag.startX = touch.clientX
-		this.drag.startY = touch.clientY
-		this.drag.scrollX = this.scroll.target.x
-		this.drag.scrollY = this.scroll.target.y
-	}
-
-	onTouchMove(e) {
-		e.preventDefault()
-		const touch = e.touches[0]
-		this.mouse.x.t = touch.clientX / this.winW
-		this.mouse.y.t = touch.clientY / this.winH
-
-		if (this.isDragging) {
-			const dx = touch.clientX - this.drag.startX
-			const dy = touch.clientY - this.drag.startY
-			this.scroll.target.x = this.drag.scrollX + dx
-			this.scroll.target.y = this.drag.scrollY + dy
-		}
-	}
-
-	onTouchEnd(e) {
-		const touch = e.changedTouches[0]
-		const clickDuration = Date.now() - this.clickStartTime
-		const clickDistance = Math.sqrt(
-			Math.pow(touch.clientX - this.clickStartPos.x, 2) +
-				Math.pow(touch.clientY - this.clickStartPos.y, 2)
-		)
-
-		// If it's a short tap with minimal movement, treat as click
-		if (clickDuration < 200 && clickDistance < 10) {
-			const clickedElement = document.elementFromPoint(
-				touch.clientX,
-				touch.clientY
-			)
-			const itemImage = clickedElement?.closest('.item-image')
-			if (itemImage) {
-				const img = itemImage.querySelector('img')
-				if (img) {
-					this.openLightbox(img.src)
-				}
-			}
-		}
-
-		this.isDragging = false
-		document.documentElement.classList.remove('dragging')
-		this.mouse.press.t = 0
-	}
-
 	render() {
 		this.scroll.current.x +=
 			(this.scroll.target.x - this.scroll.current.x) * this.scroll.ease
@@ -442,9 +377,6 @@ export default class InfiniteGrid {
 		window.removeEventListener('mousemove', this.onMouseMove)
 		this.$container.removeEventListener('mousedown', this.onMouseDown)
 		window.removeEventListener('mouseup', this.onMouseUp)
-		this.$container.removeEventListener('touchstart', this.onTouchStart)
-		window.removeEventListener('touchmove', this.onTouchMove)
-		window.removeEventListener('touchend', this.onTouchEnd)
 		this.observer.disconnect()
 
 		if (this.lightbox) {

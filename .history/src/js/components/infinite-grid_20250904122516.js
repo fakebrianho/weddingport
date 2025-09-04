@@ -48,14 +48,10 @@ export default class InfiniteGrid {
 		window.addEventListener('mousemove', this.onMouseMove)
 		this.$container.addEventListener('mousedown', this.onMouseDown)
 		window.addEventListener('mouseup', this.onMouseUp)
-
+		
 		// Touch events for mobile
-		this.$container.addEventListener('touchstart', this.onTouchStart, {
-			passive: false,
-		})
-		window.addEventListener('touchmove', this.onTouchMove, {
-			passive: false,
-		})
+		this.$container.addEventListener('touchstart', this.onTouchStart, { passive: false })
+		window.addEventListener('touchmove', this.onTouchMove, { passive: false })
 		window.addEventListener('touchend', this.onTouchEnd)
 
 		this.observer = new IntersectionObserver((entries) => {
@@ -360,10 +356,7 @@ export default class InfiniteGrid {
 
 		// If it's a short tap with minimal movement, treat as click
 		if (clickDuration < 200 && clickDistance < 10) {
-			const clickedElement = document.elementFromPoint(
-				touch.clientX,
-				touch.clientY
-			)
+			const clickedElement = document.elementFromPoint(touch.clientX, touch.clientY)
 			const itemImage = clickedElement?.closest('.item-image')
 			if (itemImage) {
 				const img = itemImage.querySelector('img')
