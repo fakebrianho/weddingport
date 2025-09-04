@@ -1,0 +1,560 @@
+@import './grid';
+@import './components';
+
+* {
+	margin: 0;
+	padding: 0;
+}
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+html {
+	background: $white;
+	color: $black;
+	font-size: calc((1 / 1440) * 100vw);
+	overflow: hidden;
+	@media (max-width: 1024px) {
+		font-size: 1px;
+	}
+}
+
+body {
+	font-family: $font-mono;
+	font-size: 12rem;
+	font-weight: 400;
+	line-height: 1.21;
+	font-optical-sizing: auto;
+	margin: 0;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	overscroll-behavior-y: none;
+	overflow: hidden;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+.no-transform {
+	&,
+	* {
+		transform: none !important;
+	}
+}
+
+// About page transition styles
+.transition-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1000;
+	pointer-events: none;
+
+	.transition-div {
+		position: fixed;
+		bottom: -100vh;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background-color: #f2f0ef;
+		transform: translateY(0);
+		transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+		&.transition-div-1 {
+			z-index: 1001;
+			background-color: #c17767;
+		}
+
+		&.transition-div-2 {
+			z-index: 1002;
+			background-color: #210203;
+			transition-delay: 0.1s;
+		}
+
+		&.active {
+			transform: translateY(-100vh);
+		}
+	}
+}
+
+.about-page {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: #f2f0ef;
+	z-index: 999;
+	transform: translateY(100vh);
+	transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	pointer-events: none;
+
+	&.active {
+		transform: translateY(0);
+		pointer-events: auto;
+	}
+
+	.about-content {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		text-align: center;
+		max-width: 600rem;
+		padding: 40rem;
+		width: 100%;
+		box-sizing: border-box;
+
+		h2 {
+			font-size: 48rem;
+			font-weight: 400;
+			margin-bottom: 30rem;
+			text-transform: uppercase;
+		}
+
+		p {
+			font-size: 18rem;
+			line-height: 1.6;
+			margin-bottom: 20rem;
+			color: #333;
+		}
+	}
+
+	.about-close {
+		position: absolute;
+		top: 20rem;
+		right: 20rem;
+		width: 40rem;
+		height: 40rem;
+		background-color: #333;
+		color: #fff;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 20rem;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+		z-index: 1003;
+
+		&:hover {
+			background-color: #555;
+		}
+	}
+
+	@media (max-width: 1024px) {
+		.about-content {
+			padding: 20px;
+			max-width: 90%;
+
+			h2 {
+				font-size: 24px;
+				margin-bottom: 20px;
+			}
+
+			p {
+				font-size: 16px;
+				margin-bottom: 15px;
+			}
+		}
+
+		.about-close {
+			top: 15px;
+			right: 15px;
+			width: 30px;
+			height: 30px;
+			font-size: 16px;
+		}
+	}
+}
+
+// Contact page styles
+.contact-page {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: #f2f0ef;
+	z-index: 999;
+	transform: translateY(100vh);
+	transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	pointer-events: none;
+
+	&.active {
+		transform: translateY(0);
+		pointer-events: auto;
+	}
+
+	.contact-content {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		text-align: center;
+		max-width: 600rem;
+		padding: 40rem;
+		width: 100%;
+		box-sizing: border-box;
+		max-height: 80vh;
+		overflow: hidden;
+
+		.tab-navigation {
+			display: flex;
+			justify-content: center;
+			margin-bottom: 40rem;
+			border-bottom: 1px solid #ddd;
+
+			.tab-button {
+				background: none;
+				border: none;
+				padding: 15rem 30rem;
+				font-size: 16rem;
+				font-family: $font-mono;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				position: relative;
+				color: #666;
+
+				&.active {
+					color: #333;
+					font-weight: 500;
+
+					&::after {
+						content: '';
+						position: absolute;
+						bottom: -1px;
+						left: 0;
+						width: 100%;
+						height: 2px;
+						background-color: #333;
+					}
+				}
+
+				&:hover {
+					color: #333;
+				}
+			}
+		}
+
+		.tab-content {
+			position: relative;
+			overflow-y: auto;
+			padding-right: 10rem;
+			scroll-behavior: smooth;
+			-webkit-overflow-scrolling: touch;
+
+			// Custom scrollbar styling
+			&::-webkit-scrollbar {
+				width: 6rem;
+			}
+
+			&::-webkit-scrollbar-track {
+				background: #f1f1f1;
+				border-radius: 3rem;
+			}
+
+			&::-webkit-scrollbar-thumb {
+				background: #c1c1c1;
+				border-radius: 3rem;
+
+				&:hover {
+					background: #a8a8a8;
+				}
+			}
+		}
+
+		.tab-panel {
+			position: relative;
+			width: 100%;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(20rem);
+			transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+			&.active {
+				opacity: 1;
+				visibility: visible;
+				transform: translateY(0);
+			}
+		}
+
+		h2 {
+			font-size: 48rem;
+			font-weight: 400;
+			margin-bottom: 30rem;
+			text-transform: uppercase;
+		}
+
+		p {
+			font-size: 18rem;
+			line-height: 1.6;
+			margin-bottom: 20rem;
+			color: #333;
+		}
+
+		.booking-info {
+			margin-top: 40rem;
+			text-align: left;
+			max-width: 400rem;
+			margin-left: auto;
+			margin-right: auto;
+
+			p {
+				margin-bottom: 15rem;
+				font-size: 16rem;
+			}
+
+			ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+
+				li {
+					padding: 10rem 0;
+					font-size: 16rem;
+					border-bottom: 1px solid #eee;
+					position: relative;
+					padding-left: 20rem;
+
+					&::before {
+						content: '•';
+						position: absolute;
+						left: 0;
+						color: #666;
+					}
+
+					&:last-child {
+						border-bottom: none;
+					}
+				}
+			}
+		}
+
+		.booking-form {
+			margin-top: 40rem;
+			max-width: 500rem;
+			margin-left: auto;
+			margin-right: auto;
+			text-align: left;
+
+			.form-group {
+				margin-bottom: 25rem;
+
+				label {
+					display: block;
+					margin-bottom: 8rem;
+					font-size: 14rem;
+					font-weight: 500;
+					color: #333;
+				}
+
+				input,
+				select,
+				textarea {
+					width: 100%;
+					padding: 12rem 15rem;
+					border: 1px solid #ddd;
+					border-radius: 4rem;
+					font-size: 16rem;
+					font-family: $font-mono;
+					background-color: #fff;
+					transition: border-color 0.3s ease, box-shadow 0.3s ease;
+					box-sizing: border-box;
+
+					&:focus {
+						outline: none;
+						border-color: #333;
+						box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.1);
+					}
+
+					&::placeholder {
+						color: #999;
+					}
+				}
+
+				textarea {
+					resize: vertical;
+					min-height: 100rem;
+				}
+
+				select {
+					cursor: pointer;
+					background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+					background-position: right 12rem center;
+					background-repeat: no-repeat;
+					background-size: 16rem;
+					padding-right: 40rem;
+				}
+			}
+
+			.submit-btn {
+				width: 100%;
+				padding: 15rem 30rem;
+				background-color: #333;
+				color: #fff;
+				border: none;
+				border-radius: 4rem;
+				font-size: 16rem;
+				font-family: $font-mono;
+				font-weight: 500;
+				cursor: pointer;
+				transition: background-color 0.3s ease, transform 0.2s ease;
+
+				&:hover {
+					background-color: #555;
+					transform: translateY(-1rem);
+				}
+
+				&:active {
+					transform: translateY(0);
+				}
+
+				&:disabled {
+					background-color: #ccc;
+					cursor: not-allowed;
+					transform: none;
+				}
+			}
+		}
+
+		.contact-info {
+			margin-top: 40rem;
+			text-align: left;
+			max-width: 400rem;
+			margin-left: auto;
+			margin-right: auto;
+
+			p {
+				margin-bottom: 15rem;
+				font-size: 16rem;
+
+				a {
+					color: #333;
+					text-decoration: underline;
+					transition: color 0.3s ease;
+
+					&:hover {
+						color: #666;
+					}
+				}
+			}
+		}
+	}
+
+	.contact-close {
+		position: absolute;
+		top: 20rem;
+		right: 20rem;
+		width: 40rem;
+		height: 40rem;
+		background-color: #333;
+		color: #fff;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 20rem;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+		z-index: 1003;
+
+		&:hover {
+			background-color: #555;
+		}
+	}
+
+	@media (max-width: 1024px) {
+		.contact-content {
+			padding: 20px;
+			max-width: 90%;
+
+			.tab-navigation {
+				margin-bottom: 30px;
+
+				.tab-button {
+					padding: 12px 20px;
+					font-size: 14px;
+				}
+			}
+
+			.tab-content {
+				// No height constraints - let content size naturally
+			}
+
+			h2 {
+				font-size: 24px;
+				margin-bottom: 20px;
+			}
+
+			p {
+				font-size: 16px;
+				margin-bottom: 15px;
+			}
+
+			.booking-info {
+				margin-top: 30px;
+
+				p {
+					font-size: 14px;
+					margin-bottom: 10px;
+				}
+
+				ul li {
+					font-size: 14px;
+					padding: 8px 0;
+					padding-left: 15px;
+				}
+			}
+
+			.booking-form {
+				margin-top: 30px;
+
+				.form-group {
+					margin-bottom: 20px;
+
+					label {
+						font-size: 13px;
+						margin-bottom: 6px;
+					}
+
+					input,
+					select,
+					textarea {
+						padding: 10px 12px;
+						font-size: 14px;
+					}
+
+					textarea {
+						min-height: 80px;
+					}
+				}
+
+				.submit-btn {
+					padding: 12px 25px;
+					font-size: 14px;
+				}
+			}
+
+			.contact-info {
+				margin-top: 30px;
+
+				p {
+					font-size: 14px;
+					margin-bottom: 10px;
+				}
+			}
+		}
+
+		.contact-close {
+			top: 15px;
+			right: 15px;
+			width: 30px;
+			height: 30px;
+			font-size: 16px;
+		}
+	}
+}

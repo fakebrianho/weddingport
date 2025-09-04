@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="robots" content="all">
+	<title>Infinite Layers Grid | Codrops</title>
+	<meta name="description" content="Brian Ho Wedding Portfolio">
+	<!-- <link rel="icon" href="/fav/fav.ico" sizes="any"> -->
+	<!-- <link rel="icon" href="/fav/fav.svg"> -->
+	<!-- <link rel="mask-icon" href="/fav/fav-mask.svg" color="#FFFFFF"> -->
+	<!-- <link rel="apple-touch-icon" href="/fav/apple-touch.png"> -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<main id="main">
+		<header class="frame">
+			<div class="frame-left">
+				<h1>Brian Ho</h1>
+				<a class="frame__back" href="#" id="about-link">About</a>
+				<a class="frame__archive" href="#" id="contact-link">Contact</a>
+			</div>
+			<div id="cdawrap" class="cdawrap"><a
+					href="http://www.guidde.com?utm_campaign=codrops&amp;utm_source=newsletter&amp;utm_medium=email&amp;utm_term=1024&amp;utm_content=demo_link"
+					class="cda-sponsor-link" target="_blank" rel="nofollow noopener">Chicago Based Wedding and Portrait
+					Photography</a></div>
+		</header>
+		<section id="hero">
+			<div id="images"></div>
+		</section>
+	</main>
+
+	<!-- About page transition divs -->
+	<div class="transition-overlay" id="transition-overlay">
+		<div class="transition-div transition-div-1"></div>
+		<div class="transition-div transition-div-2"></div>
+	</div>
+
+	<!-- About page content -->
+	<div class="about-page" id="about-page">
+		<div class="about-content">
+			<h2>About Brian Ho</h2>
+			<p>Chicago-based wedding and portrait photographer with a passion for capturing authentic moments and
+				beautiful memories.</p>
+			<p>With years of experience in the industry, I specialize in creating timeless images that tell your unique
+				story.</p>
+			<div class="about-close" id="about-close">×</div>
+		</div>
+	</div>
+
+	<!-- Contact page content -->
+	<div class="contact-page" id="contact-page">
+		<div class="contact-content">
+			<div class="tab-navigation">
+				<button class="tab-button active" data-tab="book">Book Experience</button>
+				<button class="tab-button" data-tab="contact">Contact</button>
+			</div>
+
+			<div class="tab-content">
+				<div class="tab-panel active" id="book-tab">
+					<h2>Book Experience</h2>
+					<p>Ready to capture your special moments? Let's discuss your vision and create something beautiful
+						together.</p>
+					<form class="booking-form" id="booking-form" action="https://formspree.io/f/YOUR_FORM_ID"
+						method="POST">
+						<div class="form-group">
+							<label for="name">Full Name *</label>
+							<input type="text" id="name" name="name" required>
+						</div>
+
+						<div class="form-group">
+							<label for="email">Email *</label>
+							<input type="email" id="email" name="email" required>
+						</div>
+
+						<div class="form-group">
+							<label for="phone">Phone</label>
+							<input type="tel" id="phone" name="phone">
+						</div>
+
+						<div class="form-group">
+							<label for="service">Service Type *</label>
+							<select id="service" name="service" required>
+								<option value="">Select a service</option>
+								<option value="wedding">Wedding Photography</option>
+								<option value="engagement">Engagement Session</option>
+								<option value="portrait">Portrait Session</option>
+								<option value="event">Event Photography</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="date">Preferred Date</label>
+							<input type="date" id="date" name="date">
+						</div>
+
+						<div class="form-group">
+							<label for="message">Tell us about your vision *</label>
+							<textarea id="message" name="message" rows="4" required
+								placeholder="Describe your photography needs, location preferences, style preferences, etc."></textarea>
+						</div>
+
+						<button type="submit" class="submit-btn">Send Inquiry</button>
+					</form>
+				</div>
+
+				<div class="tab-panel" id="contact-tab">
+					<h2>Contact Information</h2>
+					<p>Get in touch to discuss your photography needs or ask any questions.</p>
+					<div class="contact-info">
+						<p><strong>Email:</strong> <a href="mailto:brian@brianho.com">brian@brianho.com</a></p>
+						<p><strong>Phone:</strong> <a href="tel:+13125551234">(312) 555-1234</a></p>
+						<p><strong>Location:</strong> Chicago, IL</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="contact-close" id="contact-close">×</div>
+		</div>
+	</div>
+
+	<script type="module" src="./js/pages/index.js"></script>
+</body>
+
+</html>
