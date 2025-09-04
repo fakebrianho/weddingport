@@ -325,7 +325,6 @@ export default class InfiniteGrid {
 	onTouchStart(e) {
 		e.preventDefault()
 		e.stopPropagation()
-		console.log('Touch start detected') // Debug log
 		const touch = e.touches[0]
 		this.isDragging = true
 		this.clickStartTime = Date.now()

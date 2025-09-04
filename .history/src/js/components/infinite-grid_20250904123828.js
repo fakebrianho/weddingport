@@ -325,7 +325,6 @@ export default class InfiniteGrid {
 	onTouchStart(e) {
 		e.preventDefault()
 		e.stopPropagation()
-		console.log('Touch start detected') // Debug log
 		const touch = e.touches[0]
 		this.isDragging = true
 		this.clickStartTime = Date.now()
@@ -340,7 +339,6 @@ export default class InfiniteGrid {
 
 	onTouchMove(e) {
 		e.preventDefault()
-		e.stopPropagation()
 		const touch = e.touches[0]
 		this.mouse.x.t = touch.clientX / this.winW
 		this.mouse.y.t = touch.clientY / this.winH
