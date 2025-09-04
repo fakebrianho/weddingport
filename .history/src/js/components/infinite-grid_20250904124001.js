@@ -8,11 +8,10 @@ export default class InfiniteGrid {
 		this.sources = sources
 		this.data = data
 		this.originalSize = originalSize
-		this.isTouchDevice =
-			'ontouchstart' in window || navigator.maxTouchPoints > 0
+		this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
 
 		this.scroll = {
-			ease: this.isTouchDevice ? 0.15 : 0.06, // More responsive on touch devices
+			ease: 0.06,
 			current: { x: 0, y: 0 },
 			target: { x: 0, y: 0 },
 			last: { x: 0, y: 0 },
@@ -338,7 +337,7 @@ export default class InfiniteGrid {
 		this.drag.startY = touch.clientY
 		this.drag.scrollX = this.scroll.target.x
 		this.drag.scrollY = this.scroll.target.y
-
+		
 		// Force update mouse position
 		this.mouse.x.t = touch.clientX / this.winW
 		this.mouse.y.t = touch.clientY / this.winH
